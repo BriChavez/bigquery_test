@@ -1,10 +1,12 @@
 
 import pandas as pd
+from pandas import DataFrame
 
 # import pandas and set pandas read_cvs to a variable
-ufo_filepath = './data/nuforc_reports.csv'
-ufo_data = pd.read_csv(ufo_filepath)
-df = ufo_data
+
+ufo_data = pd.read_csv('./data/nuforc_reports.csv', index_col = 'summary')
+df = pd.DataFrame(ufo_data)
+# df = ufo_data
 # df.head()
 
 # # create empty variables so we know what internal variablesneed to define later
@@ -16,14 +18,15 @@ df = ufo_data
 
 
 """if our data doesnt already have one, this is a function to create an index from a later specified column"""
-def set_index(self, index=None):
-    df = self.df
-    """create the index by concatting two columns"""
-    # df[index_name] = df[col_list]
-    # .apply(
-    # lambda row: "-".join(row.values.astype(str)), axis=1)
-    df = df.set_index(index, inplace=True)
-    self.df = df
+# def set_index(df,index):
+
+#     """create the index by concatting two columns"""
+#     # df[index_name] = df[col_list]
+#     # .apply(
+#     # lambda row: "-".join(row.values.astype(str)), axis=1)
+#     # index=df["date_time"]
+#     df = df.set_index(index, inplace=True)
+    
 
 
 def fill_na(df):
@@ -31,9 +34,9 @@ def fill_na(df):
     df.fillna(value="null", axis=1, inplace=True)
 
 
-def drop_dupes(df, col_check=None):
-    """drop duplicates among the specified col to ensure the data isnt repeated"""
-    df.drop_duplicates(subset=[col_check], inplace=True)
+# def drop_dupes(df, col_check=None):
+#     """drop duplicates among the specified col to ensure the data isnt repeated"""
+#     df.drop_duplicates(subset=[col_check], inplace=True)
 
 
 """write the pandas df back to a csv"""
@@ -53,9 +56,9 @@ def write_csv(df):
 
 
 def run(df):
-    set_index(df, index)
+    # set_index(df)
     fill_na(df)
-    drop_dupes(df, ['col_check'])
+    # drop_dupes(df)
     write_csv(df)
 
 
