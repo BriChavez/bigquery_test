@@ -13,17 +13,12 @@ df = pd.DataFrame(ufo_data, columns=ufo_data.iloc[1])
 
 def set_header(df):
     header_row = df.iloc[1]
-    df = df(df.values[1:], columns=header_row)
+    df = df.values[1:]
 
 
 def set_index(df):
     """if our data doesnt already have one, this is a function to create an index"""
     df = df.set_index('stats')
-
-
-def drop_dupes(df):
-    """drop the duplicate image urls as that seems to be the most unique"""
-    df.drop_duplicates(subset='summary', keep='first')
 
 
 def fill_na(df):
@@ -43,11 +38,9 @@ def write_csv(df):
 
 
 def run(df):
-    # set_header(df)
+    set_header(df)
     set_index(df)
-    # drop_dupes(df)
     fill_na(df)
-
     write_csv(df)
 
 
