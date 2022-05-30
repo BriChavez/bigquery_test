@@ -1,10 +1,9 @@
 
 import pandas as pd
 from pandas import DataFrame
-# with open('./data/complete.csv', 'r') as temp_file:
 
 
-# import pandas and set pandas read_cvs to a variable
+"""import pandas and set pandas read_cvs to a variable"""
 ufo_data = pd.read_csv('./data/nuforc_reports.csv',
                     #    use the names paramater to assign header as the names of the columns
                        names=['summary', 'city', 'state', 'date_time', 
@@ -15,23 +14,11 @@ ufo_data = pd.read_csv('./data/nuforc_reports.csv',
                     #    help pandas read the datetime type files as date times by employing the paramater parse dates
                        parse_dates = ['date_time', 'posted'])
 
-
+"""turn the csv to a pandas dataframe"""
 df = pd.DataFrame(ufo_data)
-# df = df[0].str.split(',', expand=True)
-# # df.head()
 
+"""start functions to help clean the dataframe"""
 
-
-# """start functions to clean data"""
-
-# def set_index(df):
-#     """if our data doesnt already have one, this is a function to create an index"""
-#     df = df.set_index(['date_time'], inplace = True)
-
-
-# def fill_na(df):
-#     """check to see if there are any null values and changes them to NaN"""
-#     df.fillna(value="null", inplace=True)
 def drop_cols(df):
     """drop columns that we dont want to play with to make the file size smaller"""
     df.drop(columns = ['report_link', 'posted', 'city_latitude', 'city_longitude', 'stats', 'text'], inplace = True)
@@ -41,9 +28,11 @@ def fill_na(df):
     df.fillna(value="null", inplace=True)
 
 def drop_na(df):
-    """drop the row if there is no value in date_time, we have enough to work with without them"""
+    """drop rows where information is missing"""
+    # drop entire row where the feild date_time is missing
     df.dropna(subset = ['date_time'], inplace = True)
-
+    # drop entire rows where there is less than 4 columns with values
+    df.dropna(thresh =4, inplace= True)
 
 def set_index(df):
     """if our data doesnt already have one, this is a function to create an index"""
@@ -56,12 +45,9 @@ def write_csv(df):
 
 def run(df):
     """write the run function and call it on out dataframe"""
-    # set_header(df)
     drop_cols(df)
     drop_na(df)
-    set_index(df)
-    
-    
+    set_index(df)   
     fill_na(df)
     write_csv(df)
 
