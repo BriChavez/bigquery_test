@@ -12,7 +12,8 @@ ufo_data = pd.read_csv('./data/nuforc_reports.csv',
                     #    set header to 0 in order to override a header if it was included
                         header = 0,
                     #    help pandas read the datetime type files as date times by employing the paramater parse dates
-                       parse_dates = ['date_time', 'posted'])
+                       parse_dates = ['date_time', 'posted']
+                       )
 
 """turn the csv to a pandas dataframe"""
 df = pd.DataFrame(ufo_data)
@@ -25,14 +26,15 @@ def drop_cols(df):
 
 def fill_na(df):
     """check to see if there are any null values and changes them to NaN"""
-    df.fillna(value="null", inplace=True)
+    df.fillna(value="N/A", inplace=True)
 
 def drop_na(df):
     """drop rows where information is missing"""
     # drop entire row where the feild date_time is missing
-    df.dropna(subset = ['date_time'], inplace = True)
+    df.dropna(subset = ['date_time'], how = 'all', inplace = True)
     # drop entire rows where there is less than 4 columns with values
     df.dropna(thresh =4, inplace= True)
+
 
 def set_index(df):
     """if our data doesnt already have one, this is a function to create an index"""
@@ -46,9 +48,9 @@ def write_csv(df):
 def run(df):
     """write the run function and call it on out dataframe"""
     drop_cols(df)
+    fill_na(df)
     drop_na(df)
     set_index(df)   
-    fill_na(df)
     write_csv(df)
 
 
