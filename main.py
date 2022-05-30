@@ -32,7 +32,13 @@ df = pd.DataFrame(ufo_data)
 # def fill_na(df):
 #     """check to see if there are any null values and changes them to NaN"""
 #     df.fillna(value="null", inplace=True)
+def drop_cols(df):
+    """drop columns that we dont want to play with to make the file size smaller"""
+    df.drop(columns = ['report_link', 'posted', 'city_latitude', 'city_longitude', 'stats', 'text'], inplace = True)
 
+def fill_na(df):
+    """check to see if there are any null values and changes them to NaN"""
+    df.fillna(value="null", inplace=True)
 
 def write_csv(df):
     """write the pandas df back to a csv"""
@@ -43,7 +49,8 @@ def run(df):
     """write the run function and call it on out dataframe"""
     # set_header(df)
     # set_index(df)
-    # fill_na(df)
+    drop_cols(df)
+    fill_na(df)
     write_csv(df)
 
 
