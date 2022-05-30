@@ -26,7 +26,7 @@ df = pd.DataFrame(ufo_data)
 
 # def set_index(df):
 #     """if our data doesnt already have one, this is a function to create an index"""
-#     df = df.set_index('Col 2, 0', inplace = True)
+#     df = df.set_index(['date_time'], inplace = True)
 
 
 # def fill_na(df):
@@ -40,6 +40,15 @@ def fill_na(df):
     """check to see if there are any null values and changes them to NaN"""
     df.fillna(value="null", inplace=True)
 
+def drop_na(df):
+    """drop the row if there is no value in date_time, we have enough to work with without them"""
+    df.dropna(subset = ['date_time'], inplace = True)
+
+
+def set_index(df):
+    """if our data doesnt already have one, this is a function to create an index"""
+    df = df.set_index(['date_time'], inplace=True)
+
 def write_csv(df):
     """write the pandas df back to a csv"""
     clean_UFO_data = './data/cleaned_UFO_data.csv'
@@ -48,8 +57,11 @@ def write_csv(df):
 def run(df):
     """write the run function and call it on out dataframe"""
     # set_header(df)
-    # set_index(df)
     drop_cols(df)
+    drop_na(df)
+    set_index(df)
+    
+    
     fill_na(df)
     write_csv(df)
 
