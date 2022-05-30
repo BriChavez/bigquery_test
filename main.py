@@ -5,15 +5,15 @@ from pandas import DataFrame
 
 
 # import pandas and set pandas read_cvs to a variable
-ufo_data = pd.read_csv('./data/complete.csv',
+ufo_data = pd.read_csv('./data/nuforc_reports.csv',
                     #    use the names paramater to assign header as the names of the columns
-                       names = ['datetime', 'city', 'state', 'country', 'shape', 
-                       'duration(seconds)', 'duration(hours/min)', 'comments', 
-                       'date posted', 'latitude', 'longitude'],
+                       names=['summary', 'city', 'state', 'date_time', 
+                            'shape', 'duration', 'stats', 'report_link', 
+                            'text', 'posted', 'city_latitude', 'city_longitude'],
                     #    set header to 0 in order to override a header if it was included
-                       header = 0,
+                        header = 0,
                     #    help pandas read the datetime type files as date times by employing the paramater parse dates
-                       parse_dates = ['datetime', 'duration(seconds)', 'duration(hours/min)', 'date posted'],
+                       parse_dates = ['date_time', 'posted'])
 
 
 df = pd.DataFrame(ufo_data)
