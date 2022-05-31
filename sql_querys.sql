@@ -22,6 +22,14 @@ WHERE text LIKE '%chill%'
 -- returns 346
 
 
+"""ask what shapes have been reported in Portland"""
+SELECT city, shape
+FROM `ughh-347120.ufo_dataset.ufo_table` 
+WHERE city LIKE '%Portland%'
+ORDER BY shape
+-- returns changing, cigar, chevron, and circle
+
+
 """ask what the last date recorded is"""
 SELECT MAX(date_time)
 FROM `ughh-347120.ufo_dataset.ufo_table` 
@@ -35,9 +43,17 @@ WHERE city IN ("Guatemala")
 -- returns that two have. 
 
 
-"""ask what shapes have been reported in Portland"""
-SELECT city, shape
+"""ask how many of each shape has been reported in England"""
+SELECT COUNT(shape) AS COUNT, shape
 FROM `ughh-347120.ufo_dataset.ufo_table` 
-WHERE city LIKE '%Portland%'
-ORDER BY shape
--- returns changing, cigar, chevron, and circle
+WHERE city LIKE ("%England%")
+GROUP BY shape
+ORDER BY COUNT(shape) DESC
+-- returns the top 4 are light, circle, sphere, and fireball
+
+
+"""ask how many times a fireball has been the shape reported"""
+SELECT COUNT(shape)
+FROM `ughh-347120.ufo_dataset.ufo_table` 
+WHERE shape IN ('fireball')
+-- returns 7,052 times
