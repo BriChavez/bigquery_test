@@ -25,6 +25,11 @@ def drop_cols(df):
     # drop columns in the dataframe we dont want to play with to make the file size smaller
     df.drop(columns = ['report_link', 'posted', 'city_latitude', 'city_longitude', 'stats'], inplace = True)
 
+def drop_na_thresh(df):
+    """drop rows with a set amount of missing data"""
+    # drop entire rows where there is less than 4 columns with values
+    df.dropna(thresh=5, inplace=True)
+
 def fill_na(df):
     """fill empty/na values"""
     # check to see if there are any null values and changes them to a string
@@ -34,8 +39,6 @@ def drop_na(df):
     """drop rows where information is missing"""
     # drop entire row where the feild date_time is missing
     df.dropna(subset=['date_time'], inplace=True)
-    # drop entire rows where there is less than 4 columns with values
-    df.dropna(thresh =4, inplace= True)
 
 def clean_index(df):
     """drop rows where the index is set to  an n/a string"""
@@ -56,6 +59,7 @@ def write_csv(df):
 def run(df):
     """write the run function and call it on out dataframe"""
     drop_cols(df)
+    drop_na_thresh(df)
     fill_na(df)
     drop_na(df)
     set_index(df)
