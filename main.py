@@ -18,6 +18,7 @@ ufo_data = pd.read_csv('./data/nuforc_reports.csv',
 """turn the csv to a pandas dataframe"""
 df = pd.DataFrame(ufo_data)
 
+
 """start functions to help clean the dataframe"""
 
 def drop_cols(df):

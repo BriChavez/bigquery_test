@@ -3,45 +3,39 @@
         "name": "date_time",
         "type": "DATETIME",
         "mode": "REQUIRED",
-        "description": "date and time of occurance",
-        "maxLength": "256"
+        "description": "date and time of occurance"
     },
     {
         "name": "summary",
         "type": "STRING",
         "mode": "REQUIRED",
-        "description": "brief decsription of the encounter",
-        "maxLength": "10240"
+        "description": "brief decsription of the encounter"
     },
     {
         "name": "city",
         "type": "STRING",
-        "mode": "NULLABLE",
-        "maxLength": "256"
+        "mode": "NULLABLE"
     },
     {
         "name": "state",
         "type": "STRING",
-        "mode": "NULLABLE",
-        "maxLength":"256"
+        "mode": "NULLABLE"
     },
     {
         "name": "shape",
         "type": "STRING",
         "mode": "NULLABLE",
-        "description": "shape of the object encountered",
-        "maxLength": "256"
+        "description": "shape of the object encountered"
     },
     {
         "name": "duration",
         "type": "STRING",
         "mode": "NULLABLE",
-        "description": "how long the ecncounter was",
-        "maxLength": "10240"
+        "description": "how long the ecncounter was"
     },
     {
         "name": "text",
-        "type": "FLOAT",
+        "type": "STRING",
         "mode": "NULLABLE",
         "description": "full story of the occurance"
     }
